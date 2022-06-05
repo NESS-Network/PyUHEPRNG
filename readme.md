@@ -1,7 +1,7 @@
 # Py UHEPRNG
 ## UHEPRNG - Ultra High Entropy Pseudo-Random Number Generator
 
-This is Steve Gibson's [UHEPRNG](https://ness3.app/GRC's%c2%a0%7c%c2%a0UHE%20PRNG%20Demo.htm) adoptation to python 
+This is Steve Gibson's [UHEPRNG](https://www.grc.com/otg/uheprng.htm) adoptation to python 
 
 ### Running server
 ```
