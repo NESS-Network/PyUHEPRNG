@@ -1,7 +1,7 @@
 # Py UHEPRNG
 ## UHEPRNG - Ultra High Entropy Pseudo-Random Number Generator
 
-This is Steve Gibson's [UHEPRNG](https://www.grc.com/otg/uheprng.htm) adoptation to python 
+This is Steve Gibson's [UHEPRNG](https://www.grc.com/otg/uheprng.htm) adaptation to python 
 
 ### Running server
 ```
@@ -9,7 +9,7 @@ python server.py [directory]
 ```
 Where *[directory]* is dir, where you want to store your files with random-generated data.
 *[directory]* is optional, if no params, then current directory is used.
-*Tmpfs* or other memory storage is recomended.
+*Tmpfs* or other memory storage is recommended.
 
 #### Four files will be generated:
 1. seed.txt - seed of 256 random characters
