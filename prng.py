@@ -70,4 +70,4 @@ elif len(sys.argv) == 2:
 print('Usage')
 print('prng.py -s <length> or prng.py --seed  <length> display the random generated seed')
 print('Usage prng.py -n <count> or prng.py --numbers <count> display the random generated numbers')
-print('Usage prng.py -i256 or prng.py -h256 show random generated 256 bit integer which can be used in ')
+print('Usage prng.py -i256 or prng.py -h256 show random generated 256 bit integer which can be used in Ethereum')

@@ -40,6 +40,11 @@ python prng.py -n 5
 ```
 Output 5 random floating point numbers in JSON format
 
+```
+python prng.py -i256
+```
+Output random generated 256 bit integer which can be used in Ethereum
+
 ### WEB interface
 In `public` directory:
 
