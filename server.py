@@ -79,13 +79,37 @@ while True:
         file.truncate()
         file.close()
 
-    numbers = generator.generate(0, 1000)
-    numbers = json.dumps(numbers)
-    # print(numbers)
 
-    with open(directory + 'numbers-big.json', 'w+') as file:
+    seed = generator.string(1024)
+    numbers = generator.generate(0, 8*16)
+    numbersi256 = []
+    numbersh256 = []
+
+    module = 1 << 32
+
+    for x in range (0, 15):
+        i256 = 0
+
+        for i in range (0, 7):
+            num = int(numbers[x*8 + i] * 10e16)
+            num = num << (32 * i)
+            i256 += num
+
+        numbersi256.append(i256)
+        numbersh256.append(hex(i256))
+
+    numbersi256 = json.dumps(numbersi256)
+    numbersh256 = json.dumps(numbersh256)
+
+    with open(directory + 'i256.json', 'w+') as file:
         file.seek(0)
-        file.write(numbers)
+        file.write(numbersi256)
+        file.truncate()
+        file.close()
+
+    with open(directory + 'h256.json', 'w+') as file:
+        file.seek(0)
+        file.write(numbersh256)
         file.truncate()
         file.close()
 

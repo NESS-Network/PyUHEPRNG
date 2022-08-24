@@ -50,7 +50,7 @@ elif len(sys.argv) == 2:
 
     if arg == '-h256' or arg == '-i256':
         seed = generator.string(1024)
-        numbers = generator.generate(0, 17)
+        numbers = generator.generate(0, 8)
 
         module = 1 << 32
         i256 = 0
