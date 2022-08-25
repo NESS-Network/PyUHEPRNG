@@ -78,6 +78,17 @@ while True:
         file.write(seed)
         file.truncate()
         file.close()
+        file.close()
+
+    numbers = generator.generate(0, 1024)
+    numbers = json.dumps(numbers)
+
+
+    with open(directory + 'numbers-big.json', 'w+') as file:
+        file.seek(0)
+        file.write(numbers)
+        file.truncate()
+        file.close()
 
 
     seed = generator.string(1024)
