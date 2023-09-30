@@ -1,9 +1,24 @@
+import signal
+
+halt = False
+
+
+def exit_fn (*args):
+    global halt
+    halt = True
+
+
+signal.signal(signal.SIGINT, exit_fn)
+signal.signal(signal.SIGTERM, exit_fn)
+
 import lib.prng as prng
 import json
 import sys
+import os
 from base64 import b64encode
 from base64 import b64decode
 import uuid
+
 
 if len(sys.argv) == 3:
     arg = sys.argv[1]
@@ -24,7 +39,10 @@ if len(sys.argv) == 3:
             cnt = 256
         print(generator.string(cnt))
 
-        quit()
+        if halt:
+            quit(1)
+        else:
+            quit()
     elif arg == '-n' or arg == '-numbers':
         cnt += 1
         if cnt < 1:
@@ -34,7 +52,10 @@ if len(sys.argv) == 3:
         numbers = json.dumps(numbers)
         print(numbers)
 
-        quit()
+        if halt:
+            quit(1)
+        else:
+            quit()
 elif len(sys.argv) == 2:
     arg = sys.argv[1]
 
@@ -65,7 +86,12 @@ elif len(sys.argv) == 2:
         if arg == '-h256':
             print(hex(i256))
 
-        quit()
+        if halt:
+            quit(1)
+        else:
+            quit()
+
+
 
 print('Usage')
 print('prng.py -s <length> or prng.py --seed  <length> display the random generated seed')
