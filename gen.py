@@ -15,10 +15,20 @@ import lib.prng as prng
 import json
 import sys
 import os
+import base64
 from base64 import b64encode
 from base64 import b64decode
 import uuid
 
+is_pipeline = ( sys.stdin.readable() and (not sys.stdin.isatty()) )
+
+if is_pipeline:
+    randomdata = b64encode(bytes(sys.stdin.read(), 'utf-8')).decode('utf-8')
+else:
+    with open('/dev/random', 'rb') as file:
+        rand = file.read(1024)
+        randomdata = b64encode(rand).decode('utf-8')
+        file.close()
 
 if len(sys.argv) == 3:
     arg = sys.argv[1]
@@ -26,21 +36,16 @@ if len(sys.argv) == 3:
 
     generator = prng.UhePrng()
 
-    for i in range (0, 9):
-        rand = ''
-        with open('/dev/random', 'rb') as file:
-            rand = b64encode(file.read(1024)).decode('utf-8')
-            file.close()
+    generator.add_entropy(randomdata, uuid.getnode())
 
-        generator.add_entropy(rand, str(uuid.getnode()))
-
-    if arg == '-s' or arg == '-seed':
+    if arg == '-s' or arg == '-string':
         if cnt < 256:
             cnt = 256
         print(generator.string(cnt))
 
         if halt:
             quit(1)
+            
         else:
             quit()
     elif arg == '-n' or arg == '-numbers':
@@ -61,13 +66,7 @@ elif len(sys.argv) == 2:
 
     generator = prng.UhePrng()
 
-    for i in range (0, 99):
-        rand = ''
-        with open('/dev/random', 'rb') as file:
-            rand = b64encode(file.read(1024)).decode('utf-8')
-            file.close()
-
-        generator.add_entropy(rand, str(uuid.getnode()))
+    generator.add_entropy(randomdata, uuid.getnode())
 
     if arg == '-h256' or arg == '-i256':
         seed = generator.string(1024)
@@ -94,6 +93,6 @@ elif len(sys.argv) == 2:
 
 
 print('Usage')
-print('prng.py -s <length> or prng.py --seed  <length> display the random generated seed')
+print('prng.py -s <length> or prng.py --string  <length> display the random generated string')
 print('Usage prng.py -n <count> or prng.py --numbers <count> display the random generated numbers')
 print('Usage prng.py -i256 or prng.py -h256 show random generated 256 bit integer which can be used in Ethereum')

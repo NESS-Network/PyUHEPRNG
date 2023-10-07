@@ -29,22 +29,49 @@ python pserver.py /tmp/random.pipeline
 rngd -r /tmp/random.pipeline -i
 ```
 Need *rng-tools* package
-### Running utility
+### Random generator utility
 ```
-python prng.py -s 555
+python gen.py -s 555
 ```
-Output random seed 555 characters length
+Output random string 555 characters length
 
 ```
-python prng.py -n 5
+python gen.py -n 5
 ```
 Output 5 random floating point numbers in JSON format
 
 ```
-python prng.py -i256
+python gen.py -i256
 ```
 Output random generated 256 bit integer which can be used in Ethereum
+```
+echo "w7ehfiulhf 4rh39fhuqh qfh9q4hfiuqfh fh9qfhiufhuiwrfhwfh" | python gen.py -s 555
+```
+Use pipeline to use custom initialisation data
+### Seed generation utility
+Seed utility generates same data from same seed.
+Seed is accepted as pipeline input.
 
+Usage:
+```
+seed.py <random data length in bytes (as more as better)>
+```
+
+Output to screen:
+```
+echo "quick brown fox jump over the lazy dog" | python seed.py 1024
+```
+Output to file:
+```
+echo "quick brown fox jump over the lazy dog" | python seed.py 1024 > my.key
+```
+### Pseudonames
+```
+./gen = python gen.py
+./server = python server.py
+./pserver = python pserver.py
+./seed = python seed.py
+```
 ### WEB interface
 In `public` directory:
 

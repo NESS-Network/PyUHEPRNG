@@ -11,3 +11,6 @@ lib/__pycache__
 lib/__pycache__/*
 .idea
 .idea/*
+
+my.key
+seed.txt
