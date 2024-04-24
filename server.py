@@ -41,8 +41,8 @@ while True:
     # print('.')
 
     rand = ''
-    with open('/dev/random', 'rb') as file:
-        rand = b64encode(file.read(1024)).decode('utf-8')
+    with open('/dev/urandom', 'rb') as file:
+        rand = b64encode(file.read(102)).decode('utf-8')
         file.close()
 
     generator.add_entropy(rand, str(uuid.getnode()))
@@ -65,8 +65,8 @@ while True:
         file.close()
 
     rand = ''
-    with open('/dev/random', 'rb') as file:
-        rand = b64encode(file.read(1024)).decode('utf-8')
+    with open('/dev/urandom', 'rb') as file:
+        rand = b64encode(file.read(102)).decode('utf-8')
         file.close()
 
     generator.add_entropy(rand, str(uuid.getnode()))
